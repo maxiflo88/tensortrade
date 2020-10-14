@@ -16,7 +16,7 @@ import random
 import numpy as np
 import tensorflow as tf
 from collections import namedtuple
-
+import os
 from tensortrade.agents import Agent, ReplayMemory
 
 
@@ -139,7 +139,9 @@ class DQNAgent(Agent):
         total_steps_done = 0
         total_reward = 0
         stop_training = False
-
+        if not os.path.exists(save_path):
+            print(f'Created directory {save_path}')
+            os.mkdir(save_path)
         if n_steps and not n_episodes:
             n_episodes = np.iinfo(np.int32).max
 
